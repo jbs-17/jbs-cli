@@ -1,17 +1,16 @@
 #!/usr/bin/env node
-import process from "node:process";
-import { Command } from 'commander';
 
-const program = new Command('jbs-cli');
+import { Command } from 'commander';
+import path from 'path';
+
+const program = new Command();
 
 program
-  .version('1.0.0')
-  .description('deskripsi program')
-  .option('-h --help', 'ini panduan atau bantuan!')
-.action((options)=>{
-  console.log({options});
-})
+  .command('process <file>')
+  .description('Process a file')
+  .action((file) => {
+    const absolutePath = path.resolve(file);
+    console.log(`Processing file: ${absolutePath}`);
+  });
 
 program.parse(process.argv);
-
-

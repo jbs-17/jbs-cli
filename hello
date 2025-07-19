@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+import process from "node:process";
+import { Command } from 'commander';
+
+const program = new Command('jbs-cli');
+
+program
+  .version('1.0.0')
+  .description('deskripsi program')
+  .option('-h --help', 'ini panduan atau bantuan!')
+
+
+  
+if (program.opts().help) {
+  program.help();
+} else {
+  program.help()
+}
+
+program.parse(process.argv);

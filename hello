@@ -15,4 +15,3 @@ program
 program.parse(process.argv);
 
 
-READY BOSQ

@@ -10,7 +10,9 @@ program
   .option('-h --help', 'ini panduan atau bantuan!')
 .action((options)=>{
   console.log({options});
-  console.log('oke');
 })
 
 program.parse(process.argv);
+
+
+READY BOSQ

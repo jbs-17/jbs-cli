@@ -18,3 +18,4 @@ if (program.opts().help) {
 }
 
 program.parse(process.argv);
+console.log('apalah');

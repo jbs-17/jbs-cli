@@ -6,11 +6,27 @@ import path from 'path';
 const program = new Command();
 
 program
-  .command('process <file>')
-  .description('Process a file')
+  .command('ls <file>')
+  .description('List file')
   .action((file) => {
     const absolutePath = path.resolve(file);
-    console.log(`Processing file: ${absolutePath}`);
+    console.log(`File: ${absolutePath}`);
+  });
+
+program
+  .command('mkdir <dir>')
+  .description('Create directory')
+  .action((dir) => {
+    const absolutePath = path.resolve(dir);
+    console.log(`Creating directory: ${absolutePath}`);
+  });
+
+program
+  .command('rm <file>')
+  .description('Remove file')
+  .action((file) => {
+    const absolutePath = path.resolve(file);
+    console.log(`Removing file: ${absolutePath}`);
   });
 
 program.parse(process.argv);

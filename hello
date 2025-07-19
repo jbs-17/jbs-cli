@@ -10,7 +10,6 @@ program
   .option('-h --help', 'ini panduan atau bantuan!')
 .action((options)=>{
   console.log({options});
-  console.log('\n');
 })
 
 program.parse(process.argv);

@@ -8,14 +8,8 @@ program
   .version('1.0.0')
   .description('deskripsi program')
   .option('-h --help', 'ini panduan atau bantuan!')
-
-
-  
-if (program.opts().help) {
-  program.help();
-} else {
-  program.help()
-}
+.action((options)=>{
+  console.log(options);
+})
 
 program.parse(process.argv);
-console.log('apalah');

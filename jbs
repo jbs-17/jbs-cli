@@ -2,36 +2,50 @@
 
 import { Command } from 'commander';
 import path from 'path';
-import {ls, generateAsciiArt} from './index.js';
+import { ls, generateAsciiArt } from './index.js';
 
 
 
 const program = new Command();
 
-program
-.command('ls <file>')
-.description('List file')
-.action( async (file) => {
-const absolutePath = path.resolve(file);
-console.log(await ls(absolutePath));
-});
+program.command('where [file]')
+  .description('show where are you in from home dir')
+  .action(async (x) => {
+    let cwd = process.cwd();
+    if (x) { cwd = path.join(cwd, x) }
+    console.log(cwd);
+  });
+
+program.command('x')
+.action(async()=>{
+  console.log();
+})
 
 program
-.command('ascii <filepath>')
-.option('-h, --height <number>', 'height of ascii art', 50)
-.option('-w, --width <number>', 'width of ascii art', 50)
-.action(async(filepath, options) => {
-const absolutePath = path.resolve(filepath);
-console.log(await generateAsciiArt(absolutePath));
-});
+  .command('ls <file>')
+  .description('List file')
+  .action(async (file) => {
+    const absolutePath = path.resolve(file);
+    console.log(await ls(absolutePath));
+  });
+
+program
+  .command('ascii <filepath>')
+  .option('-h, --height <number>', 'height of ascii art', process.stdout.getWindowSize()[1])
+  .option('-w, --width <number>', 'width of ascii art', process.stdout.getWindowSize()[1])
+  .action(async (filepath, options) => {
+    const absolutePath = path.resolve(filepath);
+    const opts = { ...options, fit: 'box' };
+    console.log(await generateAsciiArt(absolutePath, opts));
+  });
 
 
 program
-.command('rm <file>')
-.description('Remove file')
-.action((file) => {
-const absolutePath = path.resolve(file);
-console.log(`Removing file: ${absolutePath}`);
-});
+  .command('rm <file>')
+  .description('Remove file')
+  .action((file) => {
+    const absolutePath = path.resolve(file);
+    console.log(`Removing file: ${absolutePath}`);
+  });
 
 program.parse(process.argv);

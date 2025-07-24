@@ -3,7 +3,9 @@
 import { Command } from 'commander';
 import path from 'path';
 import { ls, generateAsciiArt } from './index.js';
-
+import os from 'node:os';
+import http from 'node:http';
+import { httpServer } from './lib/http-server.js';
 
 
 const program = new Command();
@@ -16,10 +18,7 @@ program.command('where [file]')
     console.log(cwd);
   });
 
-program.command('x')
-.action(async()=>{
-  console.log();
-})
+
 
 program
   .command('ls <file>')
@@ -40,12 +39,17 @@ program
   });
 
 
-program
-  .command('rm <file>')
-  .description('Remove file')
-  .action((file) => {
-    const absolutePath = path.resolve(file);
-    console.log(`Removing file: ${absolutePath}`);
-  });
+program.command('whoami')
+  .action(async () => {
+    console.log(os.userInfo().username);
+  })
+
+program.command('server')
+  .action(async () => {
+    http.createServer(httpServer)
+      .listen(8000, () => {
+        console.log('serving current directory')
+      })
+  })
 
 program.parse(process.argv);

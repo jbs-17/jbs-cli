@@ -30,8 +30,8 @@ program
 
 program
   .command('ascii <filepath>')
-  .option('-h, --height <number>', 'height of ascii art', process.stdout.getWindowSize()[1])
-  .option('-w, --width <number>', 'width of ascii art', process.stdout.getWindowSize()[1])
+  .option('-h, --height <number>', 'height of ascii art, the widt and heigt default is your 96% terminal width', process.stdout.getWindowSize()[1] * 0.96)
+  .option('-w, --width <number>', 'width of ascii art', process.stdout.getWindowSize()[1] * 0.96)
   .action(async (filepath, options) => {
     const absolutePath = path.resolve(filepath);
     const opts = { ...options, fit: 'box' };
